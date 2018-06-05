@@ -14,6 +14,7 @@ dependencies:
   zoomable_image: ^1.2.0
   cached_network_image: "^0.4.1"
   flutter_search_bar: "^2.0.3"
+  loader_search_bar: "^0.0.2+3"
 
 dev_dependencies:
   flutter_test:

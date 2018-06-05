@@ -130,7 +130,7 @@ class _ContentState extends State<Content> {
           controller: scrollController,
           slivers: <Widget>[
             new SliverAppBar(
-              title: new Text("nHentai App"),
+              title: new Text(widget.query),
               centerTitle: true,
               floating: true,
               snap: true,

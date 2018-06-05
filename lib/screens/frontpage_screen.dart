@@ -6,11 +6,13 @@ import 'dart:convert';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
+import 'package:loader_search_bar/loader_search_bar.dart';
 import 'package:http/http.dart' as http;
 
 import '../constants.dart';
 import '../models/book.dart';
 import '../screens/details_screen.dart';
+import '../screens/details2_screen.dart';
 import '../screens/result_screen.dart';
 
 List<Book> books = [];
@@ -68,24 +70,6 @@ class _ContentState extends State<Content> {
 
   ScrollController scrollController;
   int page = 1;
-  SearchBar searchBar;
-
-  AppBar buildAppBar(BuildContext context) {
-    return new AppBar(
-      leading: searchBar.getSearchAction(context)
-    );
-  } 
-
-  _ContentState(){
-    searchBar = new SearchBar(
-      inBar: true,
-      setState: setState,
-      onSubmitted: (String query) {
-        Navigator.push(context, new MaterialPageRoute(builder: (context) => new ResultScreen(query: query,)));
-      },
-      buildDefaultAppBar: buildAppBar
-    );
-  }
 
   @override
   void initState() {
@@ -164,7 +148,21 @@ class _ContentState extends State<Content> {
               floating: true,
               snap: true,
               forceElevated: true,
-              bottom: searchBar.build(context),
+              bottom: new AppBar(
+                primary: false,
+                title: new TextField(
+                  decoration: new InputDecoration(
+                    prefixIcon: new Icon(Icons.search),
+                    isDense: true,
+                    filled: true,
+                    fillColor: Colors.white,
+                    hintText: "Search doujins",
+                  ),
+                  onSubmitted: (String query) {
+                    Navigator.push(context, new MaterialPageRoute(builder: (context) => new ResultScreen(query: query,)));
+                  },
+                ),
+              )
             ),
             new SliverPadding(
               padding: const EdgeInsets.all(5.0),
